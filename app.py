@@ -29,7 +29,9 @@ def result():
 
     return render_template(
         'result.html',
-        price=df.loc[id]['price']
+        price=df.loc[id]['price'],
+        image = df.loc[id]['img']
+        )
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
