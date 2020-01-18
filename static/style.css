@@ -1,0 +1,30 @@
+body {
+  color: black;
+  font-family: candara;
+}
+
+div.leftside {
+  float: left;
+  width: 50%;
+}
+
+div.rightside {
+  float: right;
+  width: 50%;
+}
+
+input[type=text], select {
+  padding: 5px 8px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+a {
+  font-size: 10px;
+  align: left;
+}
