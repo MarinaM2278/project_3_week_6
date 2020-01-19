@@ -1,37 +1,46 @@
-import pickle
 
-from flask import Flask, render_template, request
+from flask import Flask
 import pandas as pd
 
+app = flask.Flask(__name__)
+#pipe = pickle.load(open('model/pipe.pkl', 'rb'))
 
-app = Flask(__name__, template_folder='templates')
-pipe = pickle.load(open('model/pipe.pkl', 'rb'))
+@app.route('/page')
+def page():
+    with open ("page.html", "r") as page:
+        return page.read()
 
-@app.route('/')
-def index():
-    return render_template('index.html')
 
-@app.route('/result', methods=['POST'])
+@app.route('/result', methods=['POST', 'GET'])
 def result():
-    args = request.form
-    data = DataFrameMapper([
-    (['name'], [LabelBinarizer()]),
-    (['location'], [LabelBinarizer()]),
-    (['year'], [StandardScaler()]),
-    (['kilometers_driven'], [SimpleImputer(), StandardScaler()]),
-    (['fuel_type'], [CategoricalImputer(), LabelBinarizer()]),
-   (['transmission'],[CategoricalImputer(), LabelBinarizer()]),
-    (['owner_type'], [SimpleImputer(), StandardScaler()]),
-    (['seats'], [SimpleImputer(), StandardScaler()]),
-    ], df_out= True)
+    '''Gets prediction using the HTML form'''
 
-    id = int(pipe.predict(data))
+    if flask.request.method == 'POST':
 
-    return render_template(
-        'result.html',
-        price=df.loc[id]['price'],
-        image = df.loc[id]['img']
-        )
+        inputs = flask.request.form
 
-if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+        name = inputs['name']
+        location = inputs['location']
+        year = inputs['year']
+        kilometers_driven = inputs['kilometers_driven']
+        fuel_type = inputs['fuel_type']
+        transmission = inputs['transmission']
+        owner_type = inputs['owner_type']
+        seats = inputs['seats']
+
+
+
+        data = pd.DataFrame([{
+            'name' : name,
+            'location' : location,
+            'year' : year,
+            'kilometers_driven' : kilometers_driven,
+            'fuel_type' : fuel_type,
+            'transmission' : transmission,
+            'owner_type' : owner_type,
+            'seats' : seats}])
+
+
+        pred = pipe.predict(data)[0]
+        results = {'price': round(pred, 6)}
+        return flask.jsonify(results)
