@@ -1,21 +1,20 @@
 
 import flask
 import pickle
-from flask import Flask
+from flask import Flask, request, jsonify, render_template
 import pandas as pd
 
 app = flask.Flask(__name__)
 
 
-#-------- MODEL GOES HERE -----------#
-
-
 pipe = pickle.load(open("pipe.pkl", 'rb'))
 
-#-------- ROUTES GO HERE -----------#
+@app.route('/')
+def home():
+    return render_template("index_html")
 
-@app.route('/result', methods=['GET'])
-def predict_car_price(name):
+@app.route('/predict', methods=['POST'])
+def predict():
     args = dict(flask.request.args)
     data = pd.DataFrame({
         'name': [name],
@@ -27,9 +26,20 @@ def predict_car_price(name):
         'owner_type' : [int(args.get('owner_type'))],
         'seats': [int(args.get('owner_type'))]
 })
-    q = int(round(pipe.predict(data)[0], 5))
-    prediction = {'price': q}
-    return flask.jsonify(prediction)
+
+
+    list = [x for x in request.form.values()]
+    final_features = [np.array(list)]
+    prediction = pipe.predict(final_features)
+    output = int(round(pipe.predict(data)[0], 5))
+    return render_template ('index_html', prediction_text = 'Yor Car price will be $: {}', format(output)')
+
+@app.route('/predict_api', methods=['POST'])
+    def predict_api():
+        data = request.get_json(force = True)
+        prediction = pipe.predict([np.arraylist(data.values))])
+        output = prediction[0]
+    return jsonify(prediction)
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
