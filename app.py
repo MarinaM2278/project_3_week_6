@@ -26,8 +26,7 @@ def predict_car_price(name):
         'transmission' : [int(args.get('transmission'))],
         'owner_type' : [int(args.get('owner_type'))],
         'seats': [int(args.get('owner_type'))]
-
-
+})
     q = int(round(pipe.predict(data)[0], 5))
     prediction = {'price': q}
     return flask.jsonify(prediction)
