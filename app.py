@@ -25,7 +25,8 @@ def result():
         'seats': [int(args.get('owner_type'))]
         })
 
-    price = int(pipe.predict(data))
+    price = pipe.predict(data)
+
     return render_template('result.html')
 
 if __name__ == '__main__':
