@@ -2,6 +2,7 @@
 import flask
 import pickle
 from flask import Flask, request, jsonify, render_template
+import numpy as np
 import pandas as pd
 
 app = Flask(__name__, template_folder='templates')
@@ -25,9 +26,11 @@ def result():
         'seats': [int(args.get('owner_type'))]
         })
 
-    price = pipe.predict(data)
+    price = np.round(pipe.predict(data)* 100000).astype('int')
 
-    return render_template('result.html')
+    #price = (np.round(price, 1)).astype('int')
+
+    return render_template('result.html', price = price )
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
