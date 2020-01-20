@@ -148,6 +148,8 @@ Z_test = mapper.transform(X_test)
 
 
 model = LinearRegression()
+
+"""
 model.fit(Z_train, y_train)
 model.score(Z_train, y_train)
 model.score(Z_test, y_test)
@@ -166,17 +168,17 @@ new_data = pd.DataFrame ({
     'owner_type' : [2],
     'seats' : [5]
 })
-
 mapper.transform(new_data)
 model.predict(mapper.transform(new_data))[0]
-
 round(model.predict(mapper.transform(new_data))[0], 5)
+"""
+# Pipe
+pipe = make_pipeline(mapper, model)
+pipe.fit(X_train, y_train)
+pipe.score(X_test, y_test)
 
-pipe = Pipeline([("mapper", mapper), ("model", model)])
-
-pipe.predict(new_data)
 
 pickle.dump(pipe, open('pipe.pkl', 'wb'))
 del pipe
 pipe = pickle.load(open('pipe.pkl', 'rb'))
-pipe.predict(new_data)
+pipe

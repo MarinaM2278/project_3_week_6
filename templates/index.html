@@ -1,32 +1,102 @@
-<!Doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
   <head>
-    <meta charset="UTF-8">
-    <title>Car Price Prediction</title>
-  </head>
-  <body>
-    <div class = "login">
-      <h1> Predict Car Price</h1>
+    <title>Car Price Predictor</title>
+     <link rel="stylesheet" type="text/css" href="static/style.css">
+      </head>
+          <body>
+            <h1 align="center"  style="font-size:50px;" >Car Price Predictor</h1>
+              <div class="twosides">
+                <div class="leftside">
+                  <img src="static/fewcars.jpg"  style="width:auto;height:350px;" align="left" hspace="70" vspace="35"/>
+                    <br><br/>
+                      </div>
+                  <div class="rightside">
+                <form action = "/result" method="POST" >
+              <h4>Enter Car nformation to see the price <br/></h4>
 
+            <p>Car Name:
+              <select name="name" style="font-family: candara;" required>
+              <option value="Maruti">Maruti</option>
+              <option value="Hyundai">Hyunda</option>
+              <option value="Honda">Honda</option>
+              <option value="Toyota">Toyota</option>
+              <option value="Volkswagen">Volkswagen</option>
+              <option value="Mercedes-Benz">Mercedes-Benz</option>
+              <option value="Ford">Ford</option>
+              <option value="Mahindra">Mahindra</option>
+              <option value="BMW">BMW</option>
+              <option value="Audi">Audi</option>
+              <option value="Tata">Tata</option>
+              <option value="Skoda">Skoda</option>
+              <option value="Renault">Renault</option>
+              <option value="Chevrolet">Chevrolet</option>
+              <option value="Nissan">Nissan</option>
+              <option value="Land">Land</option>
+              <option value="Jaguar">Jaguar</option>
+              <option value="Mitsubishi">Mitsubishi</option>
+              <option value="Fiat">Fiat</option>
+              <option value="Mini">Mini</option>
+              <option value="Volvo">Volvo</option>
+              <option value="Jeep">Jeep</option>
+              <option value="Porsche">Porsche</option>
+              <option value="Datsun">Datsun</option>
+              <option value="Isuzu">Isuzu</option>
+              <option value="Force">Force</option>
+              <option value="Lamborghini">Lamborghini</option>
+              <option value="Bentley">Bentley</option>
+              <option value="Ambassador">Ambassador</option>
+              <option value="Smart">Smart</option>
+            </select></p>
+          <p>Transmission type:<br>
+            <input type="radio" name="transmission" id="Automatic" value="True" required/>
+              <label style="font-size: 13px; font-family:candara;">1</label><br />
+                <input type="radio" name="transmission" id="Manual" value="False" required/>
+                  <label style="font-size: 13px;font-family:candara;">0</label><br />
+                    </p>
+                      <p>Location:
+                        <select name="location" style="font-family: candara;">
+                          <option value = "Mumbai">Mumbai</option>
+                          <option value = "Hyderabad">Hyderabad</option>
+                          <option value = "Kochi">Kochi</option>
+                          <option value = "Coimbatore">Coimbatore</option>
+                          <option value = "Pune">Pune</option>
+                          <option value = "Kolkata">Kolkatay</option>
+                          <option value = "Chennai">Chennai</option>
+                          <option value = "Jaipur">Jaipur</option>
+                          <option value = "Bangalore">Bangalore</option>
+                          <option value = "Ahmedabad">Ahmedabad</option>
+                        </select>
+                        </p>
+                          <p>Year(1999-2019):<input name="year" required type="number" placeholder="4"
+                            style ="font-family: candara; width:10%; padding: 5px 8px;margin: 5px 0; box-sizing: border-box;">
+                          </p>
+                          <p>Kilometers Driven(number):<input name="kilometers_driven" required type="number" placeholder="7"
+                            style ="font-family: candara; width:10%; padding: 5px 8px;margin: 5px 0; box-sizing: border-box;">
+                          </p>
+                              <p>Fuel Type:
+                                <select name="fuel_type" style="font-family: candara;">
+                                  <option value = "Diesel">Diesel</option>
+                                  <option value = "Petrol">Petrol</option>
+                                </select>
+                              </p>
+                            <p>Owner Type (1 - first, 2 - second, 3 - third, 4 - forth and more):<input name="owner_type" required type="number" placeholder="12" step="1" min="1" max="4"
+                                  style ="font-family: candara; width:12%; padding:5px 8px; margin:5px 0; box-sizing: border-box;">
+                            </p>
+                            <p>Number of Seats ( 2,4,5,6,7,8,9,10):<input name="seats" required type="number" placeholder="12" step="1" min="2" max="10"
+                                  style ="font-family: candara; width:12%; padding:5px 8px; margin:5px 0; box-sizing: border-box;">
+                            </p>
 
-    <form action="/" method="POST">
-      <p>Car Name <input type="text" name="name" required = "required"/></p>
-      <p>Location <input type="text" name="location" required = "required"/></p>
-      <p>Year <input type="number" name="year" required = "required"/></p>
-      <p>Kilometers Driven <input type="text" name="kilometers_driven" required = "required"/></p>
-      <p>Fuel Type <input type="text" name="fuel_type" required = "required"/></p>
-      <p>Transmission<input type="number" name="transmission" required = "required"/></p>
-      <p>Owner type<input type="number" name="owner_type" required = "required"/></p>
-      <p>Seats<input type="number" name="seats" required = "required"/></p>
-
-      <p><input type="submit" value="submit" /></p>
-    </form>
-
-     <br>
-     <br>
-    {{prediction_text}}
-
-   </div>
-
+                        <p><input type ="submit" value="Submit" style="background-color:rgba(214, 214, 194, 0.2); padding: 5px; width: 10px;
+                            height:30px; width: 80px; color:black; text-size:24; font-weight: bold; border:none;font-family: candara;"/>
+                       </p>
+                  </form>
+                </div>
+              <div>
+            <p style="font-size:10px;" align="left"; bottom=0> Image Source:
+          <a href="https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.wallpapersafari.com%2F38%2F88%2FCM58eU.jpg&imgrefurl=https%3A%2F%2Fwallpapersafari.com%2Fw%2FCM58eU&tbnid=3bZBe1IobM2jKM&vet=12ahUKEwjZmsHAmY7nAhUC0KwKHSijAd8QMyhcegUIARDEAQ..i&docid=B52Kpo2S0FjR8M&w=800&h=411&q=funny%20cars%20images&ved=2ahUKEwjZmsHAmY7nAhUC0KwKHSijAd8QMyhcegUIARDEAQ/#">Daily Dot</a><br>
+        </p>
+      </div>
+    </div>
   </body>
 </html>
